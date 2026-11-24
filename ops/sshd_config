@@ -1,0 +1,4 @@
+Port 22
+HostKeyAlgorithms +ssh-rsa
+Ciphers aes256-ctr,3des-cbc
+KexAlgorithms -diffie-hellman-group14-sha1

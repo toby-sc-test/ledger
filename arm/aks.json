@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "parameters": {
+    "k8sVersion": {"type": "string", "defaultValue": "1.26.6"}
+  },
+  "resources": [
+    {
+      "type": "Microsoft.ContainerService/managedClusters",
+      "name": "ledger-aks",
+      "location": "uksouth",
+      "properties": {
+        "kubernetesVersion": "[parameters('k8sVersion')]",
+        "agentPoolProfiles": [{"name": "sys", "count": 3, "availabilityZones": ["1", "2", "3"]}]
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "ledgerstore",
+      "location": "[resourceGroup().location]",
+      "sku": {"name": "Standard_LRS"}
+    }
+  ]
+}
